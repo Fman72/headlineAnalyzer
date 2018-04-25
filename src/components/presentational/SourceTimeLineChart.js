@@ -31,7 +31,7 @@ let SourceTimeLineChart = (props) => {
 
   return (
       <FlatLineChart id = {'source-time-line-chart'} data = {[...props.datedSources, {refreshHack: Math.random}]}>
-        <XAxis stroke = {graphColor} width = {10} type = {'number'} dataKey = {'date'} tickFormatter = {formatTimestampToDate} domain = {[currentDate - 2592000000, currentDate]} allowDataOverflow = {true}/>
+        <XAxis stroke = {graphColor} width = {10} type = {'number'} dataKey = {'date'} tickFormatter = {formatTimestampToDate} domain = {[currentDate - 2592000000, currentDate + 25920000]} allowDataOverflow = {true}/>
         <YAxis stroke = {graphColor} type = {'number'} domain = {[-5, 5]} ticks = {lineArray}/>
         <Tooltip stroke = {graphColor} labelFormatter = {formatTimestampToDate}/>
         {lines}
