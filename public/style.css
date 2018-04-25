@@ -1,0 +1,184 @@
+/*Fixing up recharts.*/
+
+html, body,.content{
+}
+
+:root {
+  --yellow: #F2B632;
+  --dark-blue: #252839;
+  --light-grey: #E1E8F0;
+  --light-grey-2: #373e5b;
+  --white: #FFF;
+  font-face: "Myriad Pro"
+}
+
+.recharts-reponsive-container{
+  margin-top: 20%;
+}
+
+#right-div {
+  position: absolute;
+  width: 75%;
+  height: 100%;
+  right: 0;
+  margin: auto;
+  background-image: url("../images/geometry_@2X.png");
+  z-index: -1000;
+  background-repeat: repeat;
+  background-size: 250px 250px;
+  background: repeating-linear-gradient(-45deg, #D4DCE3 1%, #DBE2EB 1.3%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#left-div {
+  width: 25%;
+  height: calc(100% - 50px);
+  left: 0;
+  margin: auto;
+  background-color: var(--dark-blue);
+  border-top: 2px solid #525458;
+  position: absolute;
+  bottom: 0;
+}
+.center {
+
+}
+
+.content {
+  z-index: 10;
+}
+
+#right-div-2 h3 {
+  color: var(--light-grey);
+  font-family: "Calibri Light";
+}
+
+.filter-select > span {
+  color: var(--light-grey);
+  font-family: "Calibri Light";
+}
+
+#title-div {
+  height: 50px;
+  background-color: var(--dark-blue);
+  font-size: 2.5rem;
+  line-height: 50px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.yellow-text
+{
+  color: var(--yellow)
+}
+
+.light-grey-text
+{
+  color: var(--light-grey)
+}
+
+
+/* TODO: Work out Boostrap best practice for this. */
+.container-fluid{
+  padding-left:0px;
+  padding-right:0px;
+}
+
+.full-height{
+  height: 100%;
+}
+
+.styled-select
+{
+
+}
+
+.article-div{
+  color: var(--white);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  font-family: "Calibri Light";
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+}
+
+.article-div:hover{
+  /*box-shadow: 0px 0px 20px rgba(0, 0, 0, .5);*/
+}
+
+.article-div span{
+  max-width: 70%;
+  display: inline-block;
+
+}
+
+.article-div .top-div {
+  background-color: var(--dark-blue);
+  min-height: 60px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+
+.article-div .description-div {
+  background-color: var(--light-grey-2);
+  align-items: stretch;
+  height: 110px;
+}
+.article-div div{
+  padding: 5px 5px 5px 5px;
+  line-height: 15px;
+}
+
+.article-div .middle-div {
+  background-color: var(--dark-blue);
+}
+
+.article-div .sentiment-div {
+  background-color: var(--light-grey-2);
+  color: var(--yellow);
+  border-radius: 0px 0px 5px 5px;
+}
+
+.right{
+  right: 0;
+  position: absolute;
+}
+
+.loading-image{
+  position: absolute;
+  display: block;
+  margin: auto;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+}
+
+/*
+.styled-select .Select-value-icon {
+  color: var(--dark-blue);
+  background-color: rgba(16, 29, 76, .08);
+  border: 1px solid rgba(16, 29, 76, .24);
+}
+
+.styled-select .Select-value-label {
+  color: var(--dark-blue);
+  background-color: rgba(16, 29, 76, .08);
+  border: 1px solid rgba(16, 29, 76, .24);
+}
+
+
+.styled-select .Select-value {
+  color: var(--dark-blue); !important;
+  background-color: rgba(16, 29, 76, .08); !important;
+  border: 1px solid rgba(16, 29, 76, .24); !important;
+}*/
+
+
+
+/*http://paletton.com/#uid=73+0u0k++mXZDFo+WsA+Yhw+QaW*/
+
+/*http://paletton.com/#uid=700110k00vnsze700++sze7sze7*/

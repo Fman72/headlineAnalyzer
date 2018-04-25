@@ -1,0 +1,13 @@
+{
+  "presets": ["es2015", "react"],
+  "ignore": ["node_modules"],
+  "plugins": [
+    ["babel-plugin-root-import", {
+      "rootPathSuffix": "src"
+    }],
+    "recharts",
+    "transform-object-rest-spread",
+    "transform-async-to-generator",
+    "transform-runtime"
+  ]
+}
