@@ -48,8 +48,8 @@ class TheStandardRssAdapter extends SourceAdapter {
   }
 
   static async getTopArticlesForAllSources() {
-    let source = await getOrCreateSource('Yahoo', TheStandardRssAdapter.getSourceData());
-    let response = await AdapterApiHelper.makeGetRequest({resource: '/rss'});
+    let source = await getOrCreateSource('The Standard', TheStandardRssAdapter.getSourceData());
+    let response = await AdapterApiHelper.makeGetRequest({resource: 'rss'});
     let responseBody = await response.text();
     parseString(responseBody, (error, result) => {
       if (!error) {

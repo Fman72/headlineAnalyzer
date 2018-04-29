@@ -47,7 +47,7 @@ class TheGuardianRssAdapter extends SourceAdapter {
   }
 
   static async getTopArticlesForAllSources() {
-    let source = await getOrCreateSource('Yahoo', TheGuardianRssAdapter.getSourceData());
+    let source = await getOrCreateSource('The Guardian', TheGuardianRssAdapter.getSourceData());
     let response = await AdapterApiHelper.makeGetRequest({resource: 'world/newzealand/rss'});
     let responseBody = await response.text();
     parseString(responseBody, (error, result) => {
@@ -56,7 +56,6 @@ class TheGuardianRssAdapter extends SourceAdapter {
         Article.createAndSaveObjects(tidiedArticles, source.id, FIELD_MAPPING);
       }
       else {
-        console.log(error.message);
       }
     });
   }
