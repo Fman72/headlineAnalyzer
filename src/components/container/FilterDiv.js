@@ -28,7 +28,6 @@ class FilterDiv extends React.Component
 
     return (
       <div id = 'filter-div-container'>
-        <FilterSelect options = {this.props.countries} filterGroup = {"countries"}/>
         <FilterSelect options = {this.props.categories} filterGroup = {"categories"}/>
         <FilterSelect options = {sourceOptions} filterGroup = {"sources"}/>
       </div>

@@ -10,7 +10,7 @@ let AnalysisPage = (props) => {
   return (
     <div className = "content full-height">
 
-        <div id = "title-div" className="col-md-12 yellow-text">TRACKR | Live Sentiment Analysis</div>
+        <div id = "title-div" className="col-md-12 yellow-text">TRACKRnz | Live Sentiment Analysis</div>
 
         <div id = "left-div" className = "col-md-3">
             <h3 className = "col-md-12 light-grey-text">Filters</h3>

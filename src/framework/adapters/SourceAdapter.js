@@ -13,6 +13,7 @@ async function getOrCreateSource(sourceName, sourceDefinition) {
     return storedSource;
   }
   let newSource = new Source(sourceDefinition);
+  newSource.save();
   return newSource;
 };
 
