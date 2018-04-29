@@ -8,6 +8,8 @@ import TheSpinoffRssAdapter from "../framework/adapters/TheSpinoffRssAdapter";
 import StuffRssAdapter from "../framework/adapters/StuffRssAdapter";
 import RadioNzRssAdapter from "../framework/adapters/RadioNzRssAdapter";
 import YahooRssFeed from "../framework/adapters/YahooRssFeed";
+import TheStandardRssAdapter from "../framework/adapters/TheStandardRssAdapter";
+import TheGuardianRssAdapter from "../framework/adapters/TheGuardianRssAdapter";
 
 let recalculateSourceSentiments = (callback) => {
   databaseHelper.tryQuery(`SELECT AVG(titleSentiment) as titleSentiment, AVG(descriptionSentiment) as descriptionSentiment, source FROM article GROUP BY source;`, null)
@@ -44,6 +46,8 @@ async function updateDatabase(){
   await StuffRssAdapter.getTopArticlesForAllSources();
   await RadioNzRssAdapter.getTopArticlesForAllSources();
   await YahooRssFeed.getTopArticlesForAllSources();
+  await TheStandardRssAdapter.getTopArticlesForAllSources();
+  await TheGuardianRssAdapter.getTopArticlesForAllSources();
   await (DatedSource.generateDatedSources.bind(DatedSource), 20000, (Date.now() - 604800000) / 1000);
   console.log(`Grabbed new articles at ${formatTimestampToDate(Date.now())}`);
 }
