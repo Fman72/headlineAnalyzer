@@ -46,7 +46,15 @@ class StuffRssAdapter extends SourceAdapter {
     };
   }
 
+  static getApiHelper()
+  {
+    const AdapterApiHelper = new ApiHelper('https://stuff.co.nz/', {contentType: 'xml'});
+  }
+
   static async getTopArticlesForAllSources() {
+
+    this.getTopArticlesForSource(StuffRssAdapter.getSourceData(), 'rss', FIELD_MAPPING);
+
     let source = await getOrCreateSource('Stuff', StuffRssAdapter.getSourceData());
     let response = await AdapterApiHelper.makeGetRequest({resource: 'rss'});
     let responseBody = await response.text();
