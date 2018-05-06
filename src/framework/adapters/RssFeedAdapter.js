@@ -37,6 +37,7 @@ class RssFeedAdapter
           };
         }
         this.storedSource = null;
+        this.rssFeeds = config.rssFeeds;
     }
 
     async getOrCreateSource(sourceDefinition) {
@@ -57,9 +58,10 @@ class RssFeedAdapter
       let source = await this.getOrCreateSource(this.sourceObject);
       let response = await this.apiHelper.makeGetRequest({resource: resourceName});
       let responseBody = await response.text();
+      let storedAdapterInstance = this;
       parseString(responseBody, (error, result) => {
         if (!error) {
-          let tidiedArticles = result.rss.channel[0].item.map(this.tidyRssArticle);
+          let tidiedArticles = result.rss.channel[0].item.map(storedAdapterInstance.tidyRssArticle);
           if(category){
             tidiedArticles = tidiedArticles.map((article) => {
               article.category = category;
@@ -72,6 +74,14 @@ class RssFeedAdapter
           console.log(error.message);
         }
       });
+    }
+
+    async getArticlesForAllCategories(){
+      if(this.rssFeeds) {
+        for(let feed of this.rssFeeds){
+          await this.getArticles(feed.endpoint, feed.category);
+        }
+      }
     }
 }
 

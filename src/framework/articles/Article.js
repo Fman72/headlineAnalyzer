@@ -14,7 +14,8 @@ const defaultFieldMapping = {
     author: 'author',
     url: 'url',
     publishedAt: 'publishedAt',
-    source: 'source'
+    source: 'source',
+    category: 'category'
 };
 
 class Article extends DatabasePersistableObject
@@ -34,6 +35,7 @@ class Article extends DatabasePersistableObject
       this.url = articleObject[fieldMapping['url'] || 'url'];
       this.publishedAt = new Date(articleObject[fieldMapping['publishedAt']] || 'publishedAt');
       this.source = articleObject[fieldMapping['source'] || 'source'];
+      this.category = articleObject[fieldMapping['category'] || 'category'] || null;
       if(typeof source === "string"){
         this.source = source;
       }

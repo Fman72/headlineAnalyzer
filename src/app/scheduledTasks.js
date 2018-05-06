@@ -11,7 +11,10 @@ import YahooRssFeed from "../framework/adapters/YahooRssFeed";
 import TheStandardRssAdapter from "../framework/adapters/TheStandardRssAdapter";
 import TheGuardianRssAdapter from "../framework/adapters/TheGuardianRssAdapter";
 import RssFeedAdapter from "../framework/adapters/RssFeedAdapter";
-import {nzHeraldRssAdapter, theSpinoffRssAdapter, theStandardRssAdapter} from "../framework/adapters/AdapterList";
+import {
+  nzHeraldRssAdapter, radioNzRssAdapter, theGuardianRssAdapter, theSpinoffRssAdapter,
+  theStandardRssAdapter, yahooRssAdapter
+} from "../framework/adapters/AdapterList";
 
 let recalculateSourceSentiments = (callback) => {
   databaseHelper.tryQuery(`SELECT AVG(titleSentiment) as titleSentiment, AVG(descriptionSentiment) as descriptionSentiment, source FROM article GROUP BY source;`, null)
@@ -43,9 +46,12 @@ let startArticleGrabbing = () => {
 async function updateDatabase(){
   //NewsApiAdapter.getSources(null, (arg) => {console.log(`Grabbed new sources.`);});
   //setTimeout(NewsApiAdapter.getTopArticlesForAllSources.bind(NewsApiAdapter), 10000);
-  nzHeraldRssAdapter.getArticles('nzhrsscid_000000001.xml');
-  theSpinoffRssAdapter.getArticles('feed');
-  theStandardRssAdapter.getArticles('rss');
+  await nzHeraldRssAdapter.getArticlesForAllCategories();
+  await theSpinoffRssAdapter.getArticlesForAllCategories();
+  await radioNzRssAdapter.getArticlesForAllCategories();
+  await theStandardRssAdapter.getArticles('rss');
+  await yahooRssAdapter.getArticles('rss');
+  await theGuardianRssAdapter.getArticles('world/newzealand/rss');
   await (DatedSource.generateDatedSources.bind(DatedSource), 20000, (Date.now() - 604800000) / 1000);
   console.log(`Grabbed new articles at ${formatTimestampToDate(Date.now())}`);
 }

@@ -28,7 +28,7 @@ chartRoutes.get('/datedSources', (req, res) => {
 });
 
 chartRoutes.get('/sources', (req, res) => {
-  Source.getAllObjects()
+  Source.getObjectsWhere('country = \'nz\'')
   .then(
     (results) => {
       res.json(results);
