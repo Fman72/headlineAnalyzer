@@ -8,7 +8,7 @@ import Article from '~/framework/articles/Article';
 let chartRoutes = Router();
 
 chartRoutes.get('/datedSources', (req, res) => {
-  DatedSource.getGroupedBy(['date'], ['date', 'GROUP_CONCAT(source) as sources', 'GROUP_CONCAT(titleSentiment) as titleSentiments', 'GROUP_CONCAT(descriptionSentiment) as descriptionSentiments'])
+  DatedSource.getGroupedBy(['date', 'category'], ['date', 'category', 'GROUP_CONCAT(source) as sources', 'GROUP_CONCAT(titleSentiment) as titleSentiments', 'GROUP_CONCAT(descriptionSentiment) as descriptionSentiments'])
   .then(
     (results) => {
       results = results.map((currentValue) => {
@@ -18,7 +18,7 @@ chartRoutes.get('/datedSources', (req, res) => {
         sources.forEach((source, index) => {
           lineObject[source + '-ts'] = titleSentiments[index];
         });
-        return Object.assign({}, {date: new Date(currentValue.date).getTime()}, lineObject);
+        return Object.assign({}, {category: currentValue.category, date: new Date(currentValue.date).getTime()}, lineObject);
       });
       res.json(results);
     }, (error) => {

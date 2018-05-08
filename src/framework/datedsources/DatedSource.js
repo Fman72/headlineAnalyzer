@@ -15,6 +15,7 @@ class DatedSource extends DatabasePersistableObject{
       this.date = sourceObject.date;
       this.titleSentiment = sourceObject.titleSentiment;
       this.descriptionSentiment = sourceObject.descriptionSentiment;
+      this.category = sourceObject.category;
     }
   }
 
@@ -43,7 +44,7 @@ class DatedSource extends DatabasePersistableObject{
 
     try
     {
-      let datedSources = await Article.getGroupedBy(['source', 'DATE(publishedAt)'], ['source', 'DATE(publishedAt) as date', 'AVG(titleSentiment) as titleSentiment', 'AVG(descriptionSentiment) as descriptionSentiment'], whereClause);
+      let datedSources = await Article.getGroupedBy(['source', 'DATE(publishedAt)', 'category'], ['source', 'DATE(publishedAt) as date', 'category', 'AVG(titleSentiment) as titleSentiment', 'AVG(descriptionSentiment) as descriptionSentiment'], whereClause);
       datedSources.forEach((currentValue) => {
           let datedSource = new this(currentValue);
           datedSource.save();
