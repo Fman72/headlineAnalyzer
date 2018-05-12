@@ -34,12 +34,12 @@ class ChartContentWrapper extends React.Component{
 
   render(){
 
-    if(!this.props.filters.sources || !this.props.filters.categories)
-    {
-      return null;
-    }
+    let filteredLineNames = null;
 
-    let filteredLineNames = getLineNamesFromFilters(this.props.filters.sources, this.props.filters.categories);
+    if(this.props.filters.sources && this.props.filters.categories)
+    {
+      filteredLineNames = getLineNamesFromFilters(this.props.filters.sources, this.props.filters.categories);
+    }
 
     return (
       <div>

@@ -97,9 +97,10 @@ chartRoutes.get('/articles', (req, res) => {
 
 chartRoutes.get('/articlesForDot', (req, res) => {
   let date = req.query.date / 1000;
-  let source = req.query.source.slice(0, -3);
+  let source = req.query.source.split(':')[0];
+  let category = req.query.source.split(':')[1].slice(0, -3);
 
-  Article.getObjectsWhere(`UNIX_TIMESTAMP(DATE(publishedAt))  = ${date} AND source = '${source}'`).then(
+  Article.getObjectsWhere(`UNIX_TIMESTAMP(DATE(publishedAt))  = ${date} AND source = '${source}' AND category = '${category}'`).then(
     (articles) => res.json(articles),
     (reason) => console.warn(reason)
   );
