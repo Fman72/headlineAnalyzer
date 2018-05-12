@@ -1,6 +1,6 @@
 import ApiHelper from '~/ApiHelper';
 
-let chartRoutesHelper = new ApiHelper(`http://139.99.193.82:3000/chart`, {contentType: 'json'});
+let chartRoutesHelper = new ApiHelper(`http://localhost:8080/chart`, {contentType: 'json'});
 
 async function getAllSources()
 {
@@ -19,7 +19,7 @@ async function getCategories()
 
 async function getDatedSources()
 {
-  return await chartRoutesHelper.makeGetRequest({resource: '/datedSources'});
+  return await chartRoutesHelper.makeGetRequest({resource: '/datedSourcesByCategory'});
 }
 
 async function getArticlesForDot(date, source)

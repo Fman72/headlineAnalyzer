@@ -12,6 +12,7 @@ import SourceTimeLineChart from '../presentational/SourceTimeLineChart';
 import {getSourcesByTime} from '~/chartRouteRequests';
 import {tryRequestFocusedArticles} from "../../actions/articleActions";
 import {showFocusedArticlesModal} from "../../actions/modalActions";
+import {getLineNamesFromFilters} from "../../chartUtils";
 
 class ChartContentWrapper extends React.Component{
   constructor(props){
@@ -32,9 +33,17 @@ class ChartContentWrapper extends React.Component{
   }
 
   render(){
+
+    if(!this.props.filters.sources || !this.props.filters.categories)
+    {
+      return null;
+    }
+
+    let filteredLineNames = getLineNamesFromFilters(this.props.filters.sources, this.props.filters.categories);
+
     return (
       <div>
-        <SourceTimeLineChart handleDotClick = {this.handleDotClick} sources = {this.props.sources.sourceList} datedSources = {this.props.sources.datedSourceList} filters = {this.props.filters}/>
+        <SourceTimeLineChart filteredLineNames = {filteredLineNames} handleDotClick = {this.handleDotClick} sources = {this.props.sources.sourceList} datedSources = {this.props.sources.datedSourceList} filters = {this.props.filters}/>
       </div>
     );
   }

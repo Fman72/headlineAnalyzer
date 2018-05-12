@@ -1,4 +1,4 @@
-let filterData = (data, filterArrays, filterMappings) => {
+export let filterData = (data, filterArrays, filterMappings) => {
   if ((data && filterArrays)) {
     let filteredData = data.map(item => Object.assign({}, item));
       Object.keys(filterArrays).forEach((currentFilter) => {
@@ -12,6 +12,14 @@ let filterData = (data, filterArrays, filterMappings) => {
     return filteredData;
   }
   return data;
-}
+};
 
-export {filterData};
+export let getLineNamesFromFilters = (sources, categories) => {
+  let lineNames = [];
+  sources.forEach(source => {
+    categories.forEach(category => {
+      lineNames.push(`${source}:${category}-ts`);
+    });
+  });
+  return lineNames;
+};

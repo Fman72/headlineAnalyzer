@@ -3,61 +3,92 @@ import {Router} from 'express';
 import Source from '~/framework/sources/Source';
 import DatedSource from '~/framework/datedsources/DatedSource';
 import Article from '~/framework/articles/Article';
+import {formatTimestampToDate} from "../util";
 
 
 let chartRoutes = Router();
 
 chartRoutes.get('/datedSources', (req, res) => {
-  DatedSource.getGroupedBy(['date', 'category'], ['date', 'category', 'GROUP_CONCAT(source) as sources', 'GROUP_CONCAT(titleSentiment) as titleSentiments', 'GROUP_CONCAT(descriptionSentiment) as descriptionSentiments'])
-  .then(
-    (results) => {
-      results = results.map((currentValue) => {
-        let sources = currentValue.sources.split(',');
-        let titleSentiments = currentValue.titleSentiments.split(',');
-        let lineObject = [];
-        sources.forEach((source, index) => {
-          lineObject[source + '-ts'] = titleSentiments[index];
+  DatedSource.getGroupedBy(['date'], ['date', 'GROUP_CONCAT(source ORDER BY source DESC) as sources', 'GROUP_CONCAT(titleSentiment ORDER BY source DESC)  as titleSentiments', 'GROUP_CONCAT(descriptionSentiment ORDER BY source DESC) as descriptionSentiments'])
+    .then(
+      (results) => {
+        results = results.map((currentValue) => {
+          let sources = currentValue.sources.split(',');
+          let titleSentiments = currentValue.titleSentiments.split(',');
+          let lineObject = [];
+          sources.forEach((source, index) => {
+            lineObject[source + '-ts'] = titleSentiments[index];
+          });
+          return Object.assign({}, {date: new Date(currentValue.date).getTime()}, lineObject);
         });
-        return Object.assign({}, {category: currentValue.category, date: new Date(currentValue.date).getTime()}, lineObject);
-      });
-      res.json(results);
-    }, (error) => {
-      console.warn(error.message);
-    }
-  );
+        res.json(results);
+      }, (error) => {
+        console.warn(error.message);
+      }
+    );
+});
+
+chartRoutes.get('/datedSourcesByCategory', (req, res) => {
+  DatedSource.getGroupedBy(
+    ['date'],
+    ['date', 'GROUP_CONCAT(source ORDER BY source DESC) as sources',
+      'GROUP_CONCAT(titleSentiment ORDER BY source DESC)  as titleSentiments',
+      'GROUP_CONCAT(descriptionSentiment ORDER BY source DESC) as descriptionSentiments',
+      'GROUP_CONCAT(category ORDER BY source DESC) as categories',
+    ],
+    `category IS NOT NULL and date > ${formatTimestampToDate(Date.now() - 2594000000)}`)
+    .then(
+      (results) => {
+        results = results.map((currentValue) => {
+          let sources = currentValue.sources.split(',');
+          let titleSentiments = currentValue.titleSentiments.split(',');
+          let categories = currentValue.categories.split(',');
+          let lineObject = [];
+          sources.forEach((source, index) => {
+            lineObject[`${source}:${categories[index]}-ts`] = titleSentiments[index];
+          });
+          return Object.assign({}, {
+            date: new Date(currentValue.date).getTime()
+          }, lineObject);
+        });
+        res.json(results);
+      }, (error) => {
+        console.warn(error.message);
+      }
+    );
 });
 
 chartRoutes.get('/sources', (req, res) => {
   Source.getObjectsWhere('country = \'nz\'')
-  .then(
-    (results) => {
-      res.json(results);
-    }, (reason) => {
-      console.warn(reason);
-    }
-  );
+    .then(
+      (results) => {
+        res.json(results);
+      }, (reason) => {
+        console.warn(reason);
+      }
+    );
 });
 
 chartRoutes.get('/categories', (req, res) => {
   Source.getCategories()
-  .then(
-    (results) => {
-      res.json(results);
-    }, (reason) => {
-      console.warn(reason);
-    }
-  );
+    .then(
+      (results) => {
+        res.json(results);
+      }, (reason) => {
+        console.warn(reason);
+      }
+    );
 });
 
 chartRoutes.get('/countries', (req, res) => {
   Source.getCountries()
-  .then(
-    (results) => {
-      res.json(results);
-    }, (reason) => {
-      console.warn(reason);
-    }
-  );
+    .then(
+      (results) => {
+        res.json(results);
+      }, (reason) => {
+        console.warn(reason);
+      }
+    );
 });
 
 chartRoutes.get('/articles', (req, res) => {

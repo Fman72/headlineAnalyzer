@@ -13,15 +13,13 @@ let SourceTimeLineChart = (props) => {
 
   let graphColor = "#101D4C";
 
-  let filteredSources = filterData(props.sources, props.filters, {countries: 'country', categories: 'category', sources: 'id'})
-
-  if(filteredSources)
+  if(props.filteredLineNames)
   {
-    let maxLength = filteredSources.length < 5 ? filteredSources.length : 5;
+    let maxLength = props.filteredLineNames.length < 5 ? props.filteredLineNames.length : 5;
 
     for(let i = 0; i < maxLength; i++)
     {
-      lines.push(<Line stroke = {colorArray[i]} key = {filteredSources[i].id} connectNulls = {true} dataKey = {filteredSources[i].id + '-ts'} name = {filteredSources[i].name} activeDot = {{onClick: props.handleDotClick}}/>);
+      lines.push(<Line stroke = {colorArray[i]} key = {props.filteredLineNames[i]} connectNulls = {true} dataKey = {props.filteredLineNames[i]} name = {props.filteredLineNames[i]} activeDot = {{onClick: props.handleDotClick}}/>);
     }
   }
 
