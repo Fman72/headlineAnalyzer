@@ -8,6 +8,8 @@ import utilRoutes from '~/routes/utilRoutes';
 
 import {startArticleGrabbing} from '~/app/scheduledTasks';
 
+import {port} from './sensitiveStuff';
+
 let app = express();
 
 Error.stackTraceLimit = 50;
@@ -25,7 +27,7 @@ app.use('/chart', chartRoutes);
 
 app.use(express.static('public'));
 
-app.listen(3000, () => {
+app.listen(port, null, () => {
   console.log("Up and running fam.");
 });
 
