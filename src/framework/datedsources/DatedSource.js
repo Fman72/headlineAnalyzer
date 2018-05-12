@@ -23,6 +23,19 @@ class DatedSource extends DatabasePersistableObject{
     return "datedsource";
   }
 
+  static async getCategories()
+  {
+    try
+    {
+      let categories = await this.getDistinct('category');
+      return categories.filter(item => item != null);
+    }
+    catch(error)
+    {
+      promiseRejectionHandler(error);
+    }
+  }
+
   static async generateDatedSources(after, before)
   {
     let whereClause = [];

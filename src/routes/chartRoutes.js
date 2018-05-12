@@ -70,7 +70,7 @@ chartRoutes.get('/sources', (req, res) => {
 });
 
 chartRoutes.get('/categories', (req, res) => {
-  Source.getCategories()
+  DatedSource.getCategories()
     .then(
       (results) => {
         res.json(results);
