@@ -157,6 +157,18 @@ html, body,.content{
   right:0;
 }
 
+.ReactModal__Content{
+  background-repeat: repeat;
+  background-size: 250px 250px;
+  background: repeating-linear-gradient(-45deg, #D4DCE3 1%, #DBE2EB 1.3%);
+}
+
+.ReactModal__Content  h2{
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
 /*
 .styled-select .Select-value-icon {
   color: var(--dark-blue);
