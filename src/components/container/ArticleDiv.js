@@ -25,6 +25,7 @@ class ArticleDiv extends React.Component{
         <div onMouseOver = {this.handleMouseOver} onMouseOut = {this.handleMouseOut} className = {'article-div col-md-2'} style = {{zIndex: 10}}>
           <div className = {'top-div'}>
             {this.props.article.title}
+            <br/><a href = {this.props.article.url}>To Article Source</a>
           </div>
           <div className={"description-div"}>
             "{this.props.article.description}"
@@ -44,6 +45,7 @@ class ArticleDiv extends React.Component{
       <div onMouseOver = {this.handleMouseOver} onMouseOut = {this.handleMouseOut} className = {'article-div col-md-2'}>
         <div className = {'top-div'}>
           {this.props.article.title}
+          <br/><a href = {this.props.article.url}>To Article Source</a>
         </div>
         <div className={"middle-div"}>
           {this.props.article.publishedAt}
