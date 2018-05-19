@@ -1,6 +1,6 @@
 import {ADD_FILTER, REMOVE_FILTER, GET_COUNTRIES, GET_CATEGORIES, SET_FILTERS} from '~/actions/actionNames';
 
-let filters = (state = {}, action) => {
+let filters = (state = {sources: ['radionz'], categories: ['politics', 'international']}, action) => {
   switch (action.type) {
     case ADD_FILTER:
       return Object.assign({}, state, {[action.filterGroup]: [...state[action.filterGroup], action.filterValue]});

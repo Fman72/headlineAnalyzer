@@ -12,14 +12,13 @@ class FilterSelect extends React.Component{
   constructor(props){
     super(props)
     this.handleChange = this.handleChange.bind(this);
-    this.state = {value: [""]};
+    this.state = {value: props.value};
   }
 
   handleChange(value)
   {
     if(value)
     {
-      this.setState({value});
       let valuesArray = value.map((currentValue) => {
         return currentValue.value;
       });
@@ -31,7 +30,7 @@ class FilterSelect extends React.Component{
     return (
       <div className = 'filter-select col-md-12'>
         <span>{initialCapsString(this.props.filterGroup)}</span>
-        <ControlledSelect className = "styled-select" multi = {true} value = {this.state.value} options = {this.props.options} onChange = {this.handleChange}/>
+        <ControlledSelect className = "styled-select" multi = {true} value = {this.props.value} options = {this.props.options} onChange = {this.handleChange}/>
       </div>
     );
   }

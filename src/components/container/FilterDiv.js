@@ -28,8 +28,8 @@ class FilterDiv extends React.Component
 
     return (
       <div id = 'filter-div-container'>
-        <FilterSelect options = {this.props.categories} filterGroup = {"categories"}/>
-        <FilterSelect options = {sourceOptions} filterGroup = {"sources"}/>
+        <FilterSelect options = {this.props.categories} filterGroup = {"categories"} value = {this.props.filters.categories}/>
+        <FilterSelect options = {sourceOptions} filterGroup = {"sources"} value = {this.props.filters.sources}/>
       </div>
     );
   }
@@ -39,7 +39,8 @@ function mapStateToProps(state, ownProps){
   return {
     countries: state.countries,
     categories: state.categories,
-    sources: state.sources
+    sources: state.sources,
+    filters: state.filters
   };
 }
 
