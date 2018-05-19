@@ -49,7 +49,7 @@ async function updateDatabase(){
   await nzHeraldRssAdapter.getArticlesForAllCategories();
   await theSpinoffRssAdapter.getArticlesForAllCategories();
   await radioNzRssAdapter.getArticlesForAllCategories();
-  await theStandardRssAdapter.getArticles('rss');
+  await theStandardRssAdapter.getArticlesForAllCategories();
   await yahooRssAdapter.getArticles('rss');
   await theGuardianRssAdapter.getArticles('world/newzealand/rss');
   await (DatedSource.generateDatedSources.bind(DatedSource), 20000, (Date.now() - 604800000) / 1000);
