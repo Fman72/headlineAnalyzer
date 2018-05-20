@@ -6,7 +6,7 @@ function AppRoot(props){
     return (
         <Grid fluid className="full-height">
           {props.children}
-          <script src = 'trackr/bundle.js'></script>
+          <script src = 'bundle.js'></script>
         </Grid>
     );
 };

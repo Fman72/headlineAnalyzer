@@ -1,6 +1,6 @@
 import ApiHelper from '~/ApiHelper';
 
-let chartRoutesHelper = new ApiHelper(`http://localhost:8080/chart`, {contentType: 'json'});
+let chartRoutesHelper = new ApiHelper(`http://localhost:8080/trackr/chart`, {contentType: 'json'});
 
 async function getAllSources()
 {
