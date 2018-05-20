@@ -10,22 +10,24 @@ import {startArticleGrabbing} from '~/app/scheduledTasks';
 
 import {port} from './sensitiveStuff';
 
+const BASE_ROUTE = '/trackr';
+
 let app = express();
 
 Error.stackTraceLimit = 50;
 
-app.use(bodyParser.json());
+app.use(BASE_ROUTE, bodyParser.json());
 
 //Scheduled Tasks
-app.use('/util', utilRoutes);
+app.use(BASE_ROUTE + '/util', utilRoutes);
 
-app.use(pageRoutes);
+app.use(BASE_ROUTE, pageRoutes);
 
-app.use('/test', testRoutes);
+app.use(BASE_ROUTE + '/test', testRoutes);
 
-app.use('/chart', chartRoutes);
+app.use(BASE_ROUTE + '/chart', chartRoutes);
 
-app.use(express.static('public'));
+app.use(BASE_ROUTE, express.static('public'));
 
 app.listen(port, null, () => {
   console.log("Up and running fam.");
