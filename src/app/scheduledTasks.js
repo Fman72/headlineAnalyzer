@@ -38,11 +38,6 @@ let recalculateSourceSentiments = (callback) => {
   });
 };
 
-let startArticleGrabbing = () => {
-  updateDatabase();
-  setInterval(startArticleGrabbing, 86400000);
-}
-
 async function updateDatabase(){
   //NewsApiAdapter.getSources(null, (arg) => {console.log(`Grabbed new sources.`);});
   //setTimeout(NewsApiAdapter.getTopArticlesForAllSources.bind(NewsApiAdapter), 10000);
@@ -52,9 +47,14 @@ async function updateDatabase(){
   await theStandardRssAdapter.getArticlesForAllCategories();
   await yahooRssAdapter.getArticles('rss');
   await theGuardianRssAdapter.getArticles('world/newzealand/rss');
-  await (DatedSource.generateDatedSources.bind(DatedSource), 20000, (Date.now() - 604800000) / 1000);
+  const boundGenerateDatedSources = DatedSource.generateDatedSources.bind(DatedSource);
+  await (boundGenerateDatedSources(20000, (Date.now() - 604800000) / 1000));
   console.log(`Grabbed new articles at ${formatTimestampToDate(Date.now())}`);
 }
 
+let startArticleGrabbing = () => {
+  updateDatabase();
+  setInterval(updateDatabase, 86400000);
+}
 
 export {startArticleGrabbing, recalculateSourceSentiments, updateDatabase};
