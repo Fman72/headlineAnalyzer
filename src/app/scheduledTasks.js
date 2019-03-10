@@ -45,11 +45,13 @@ async function updateDatabase(){
   await theSpinoffRssAdapter.getArticlesForAllCategories();
   await radioNzRssAdapter.getArticlesForAllCategories();
   await theStandardRssAdapter.getArticlesForAllCategories();
-  await yahooRssAdapter.getArticles('rss');
+  //await yahooRssAdapter.getArticles('rss');
   await theGuardianRssAdapter.getArticles('world/newzealand/rss');
-  const boundGenerateDatedSources = DatedSource.generateDatedSources.bind(DatedSource);
-  await (boundGenerateDatedSources(20000, (Date.now() - 604800000) / 1000));
   console.log(`Grabbed new articles at ${formatTimestampToDate(Date.now())}`);
+
+  await DatedSource.generateDatedSources((Date.now() - 604800000) / 1000);
+
+  console.log(`Generated dated sources at ${formatTimestampToDate(Date.now())}`);
 }
 
 let startArticleGrabbing = () => {

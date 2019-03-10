@@ -153,6 +153,7 @@ class DatabasePersistableObject
     static getGroupedBy(groupByValues, fields, whereClause = true)
     {
       let queryString = `SELECT ${fields ? fields.join(', ') : '*'} FROM ${this.getTableName()} WHERE ${whereClause} GROUP BY ${groupByValues.join(', ')}`;
+      console.log("Running getGroupedBy. Query String: " + queryString);
       return databaseHelper.tryQuery(queryString);
     }
 }

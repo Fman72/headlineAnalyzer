@@ -54,6 +54,8 @@ class DatedSource extends DatabasePersistableObject{
     else{
       whereClause = whereClause.join(' AND ');
     }
+    
+    console.log("Generating dated sources. Where clause: " + whereClause);
 
     try
     {
